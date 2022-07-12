@@ -13,21 +13,40 @@ export function Page() {
   const btnRef = useRef<HTMLButtonElement>(null);
 
   function navToggle() {
-    btnRef.current?.classList.toggle("open");
+    {
+      isActive
+        ? btnRef.current?.classList.remove("open")
+        : btnRef.current?.classList.add("open");
+    }
+
     {
       isActive ? setIsActive(false) : setIsActive(true);
     }
   }
+
+
   return (
     <div className="flex flex-col w-full h-full">
       <header className="flex justify-between items-center py-6 px-6 lg:px-32 border-b border-gray-300 bg-gray-100 md:grid-cols-2">
-        <strong className="font-serif text-2xl text-black">Labelle <span className="text-pink-500">Depilação</span></strong>
+        <strong className="font-serif text-2xl text-black">
+          Labelle <span className="text-pink-500">Depilação</span>
+        </strong>
         <div className="hidden md:flex gap-8 text-black">
-        <a className="hover:text-pink-500" href="#home">Home</a>
-        <a className="hover:text-pink-500" href="#about">Sobre</a>
-        <a className="hover:text-pink-500" href="#services">Serviços</a>
-        <a className="hover:text-pink-500" href="#brief">Depoimentos</a>
-        <a className="hover:text-pink-500" href="#contato">Contato</a>
+          <a className="hover:text-pink-500" href="#home">
+            Home
+          </a>
+          <a className="hover:text-pink-500" href="#about">
+            Sobre
+          </a>
+          <a className="hover:text-pink-500" href="#services">
+            Serviços
+          </a>
+          <a className="hover:text-pink-500" href="#brief">
+            Depoimentos
+          </a>
+          <a className="hover:text-pink-500" href="#contato">
+            Contato
+          </a>
         </div>
         <button
           className="hamburger block md:hidden focus:outline-none"
@@ -40,7 +59,16 @@ export function Page() {
         </button>
       </header>
       {isActive ? (
-        <MobileMenu />
+        <MobileMenu
+          click={() => {
+            setIsActive(false);
+            {
+              isActive
+                ? btnRef.current?.classList.remove("open")
+                : btnRef.current?.classList.add("open");
+            }
+          }}
+        />
       ) : (
         <>
           <Home />
